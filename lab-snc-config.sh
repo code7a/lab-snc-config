@@ -1,4 +1,4 @@
-#lab_snc_config.sh
+#lab-snc-config.sh
  
 #Copyright 2022 illumio
 #
@@ -15,7 +15,7 @@
 #limitations under the License.
  
 get_config_yml(){
-    source .lab_snc_config.yml || get_lab_snc_vars
+    source $BASEDIR/.lab-snc-config.yml || get_lab_snc_vars
 }
 
 get_lab_snc_vars(){
@@ -31,8 +31,9 @@ get_lab_snc_vars(){
     read -p "Enter PCE domain name: " PCE_DOMAIN
     read -p "Enter PCE username email address: " PCE_USERNAME
     echo -n "Enter PCE password (alphanumeric, 8 characters, upper and lower case): " && read -s PCE_PASSWORD
+    echo " "
     PCE_VERSION=${code_versions[(($PCE_VERSION_SELECTION-1))]}
-    cat << EOF > .lab_snc_config.yml
+    cat << EOF > $BASEDIR/.lab-snc-config.yml
 export PCE_VERSION=$PCE_VERSION
 export PCE_DOMAIN=$PCE_DOMAIN
 export PCE_USERNAME=$PCE_USERNAME
@@ -55,7 +56,7 @@ reset(){
     rm -rf /var/lib/illumio-pce
     rm -rf /var/log/illumio-pce
     rm -rf /etc/illumio-pce
-    rm -f .lab_snc_config.yml
+    rm -f $BASEDIR/.lab-snc-config.yml
 }
 
 install_and_config(){
@@ -78,7 +79,7 @@ install_and_config(){
     cat /etc/hosts|grep $PCE_DOMAIN || echo $((ip a ls ens192||ip a ls eth0)|grep 'inet '|cut -d' ' -f 6|cut -d'/' -f1) $(echo $PCE_DOMAIN) >> /etc/hosts
     #setup runtime yaml
     illumio-pce-env setup --batch node_type='snc0' email_address=$PCE_USERNAME pce_fqdn=$PCE_DOMAIN metrics_collection_enabled=false
-    error_code=$? && if [ "$error_code" -ne 0 ]; then echo "ERROR: "$error_code && rm -f .lab_snc_config.yml && install_and_config; fi
+    error_code=$? && if [ "$error_code" -ne 0 ]; then echo "ERROR: "$error_code && rm -f $BASEDIR/.lab-snc-config.yml && install_and_config && exit 0; fi
     #start pce
     illumio-pce-env setup --list
     illumio-pce-env setup --list --test 5
@@ -99,6 +100,8 @@ install_and_config(){
     sudo -u ilo-pce illumio-pce-ctl ven-software-install /illumio/$PCE_VERSION/illumio-ven-bundle-* --compatibility-matrix /illumio/$PCE_VERSION/illumio-release-compatibility-* --default --no-prompt --orgs 1 || sudo -u ilo-pce illumio-pce-ctl ven-software-install /illumio/$PCE_VERSION/illumio-ven-bundle-* --default --no-prompt --orgs 1
     echo "Install complete."
 }
+
+BASEDIR=$(dirname $0)
 
 install_and_config
 
