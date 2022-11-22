@@ -27,12 +27,16 @@ get_lab_snc_vars(){
         ((version_count++))
         echo $version_count") "$code_version
     done
-    read -p "Version selection: " PCE_VERSION_SELECTION
+    read -p "Version selection (1-${#code_versions[@]}): " PCE_VERSION_SELECTION
+    PCE_VERSION=${code_versions[(($PCE_VERSION_SELECTION-1))]}
+    if ! [[ "$PCE_VERSION" =~ ^[[:digit:]]+$ ]]; then
+        echo "ERROR: version selection. Only key in 1-${#code_versions[@]}"
+        exit 1
+    fi
     read -p "Enter PCE domain name: " PCE_DOMAIN
     read -p "Enter PCE username email address: " PCE_USERNAME
     echo -n "Enter PCE password (alphanumeric, 8 characters, upper and lower case): " && read -s PCE_PASSWORD
     echo " "
-    PCE_VERSION=${code_versions[(($PCE_VERSION_SELECTION-1))]}
     cat << EOF > $BASEDIR/.lab-snc-config.yml
 export PCE_VERSION=$PCE_VERSION
 export PCE_DOMAIN=$PCE_DOMAIN
