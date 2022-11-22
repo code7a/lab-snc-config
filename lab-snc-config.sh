@@ -50,13 +50,15 @@ reset(){
             * ) echo "Please answer yes or no.";;
         esac
     done
-    sudo -u ilo-pce /opt/illumio-pce/illumio-pce-ctl reset --no-prompt
+    sudo -u ilo-pce /opt/illumio-pce/illumio-pce-ctl reset --truncate-logs --no-prompt
     rpm -e illumio-pce-ui
     rpm -e illumio-pce
     rm -rf /var/lib/illumio-pce
     rm -rf /var/log/illumio-pce
     rm -rf /etc/illumio-pce
+    rm -rf /opt/illumio-pce
     rm -f $BASEDIR/.lab-snc-config.yml
+    sed -i '/localhost/!d' /etc/hosts
 }
 
 install_and_config(){
