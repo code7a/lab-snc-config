@@ -28,11 +28,11 @@ get_lab_snc_vars(){
         echo $version_count") "$code_version
     done
     read -p "Version selection (1-${#code_versions[@]}): " PCE_VERSION_SELECTION
-    PCE_VERSION=${code_versions[(($PCE_VERSION_SELECTION-1))]}
-    if ! [[ "$PCE_VERSION" =~ ^[[:digit:]]+$ ]]; then
+    if ! [[ "$PCE_VERSION_SELECTION" =~ ^[[:digit:]]+$ ]]; then
         echo "ERROR: version selection. Only key in 1-${#code_versions[@]}"
         get_lab_snc_vars && exit 0
     fi
+    PCE_VERSION=${code_versions[(($PCE_VERSION_SELECTION-1))]}
     read -p "Enter PCE domain name: " PCE_DOMAIN
     read -p "Enter PCE username email address: " PCE_USERNAME
     echo -n "Enter PCE password (alphanumeric, 8 characters, upper and lower case): " && read -s PCE_PASSWORD
