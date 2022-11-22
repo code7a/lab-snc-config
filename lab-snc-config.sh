@@ -21,7 +21,7 @@ get_config_yml(){
 get_lab_snc_vars(){
     echo "Running lab SNC config script..."
     echo "PCE versions:"
-    code_versions=($(ls /illumio/))
+    code_versions=($(ls /illumio-repo/))
     version_count=0
     for code_version in "${code_versions[@]}"; do
         ((version_count++))
@@ -66,7 +66,7 @@ install_and_config(){
     echo "Installing..."
     get_config_yml
     #install rpms
-    rpm -Uvh /illumio/$PCE_VERSION/illumio-pce-*.rpm
+    rpm -Uvh /illumio-repo/$PCE_VERSION/illumio-pce-*.rpm
     error_code=$? && if [ "$error_code" -ne 0 ]; then echo "ERROR: "$error_code && reset && install_and_config && exit 0; fi
     #generate certificate
     ldconfig /usr/local/lib64/
@@ -99,7 +99,7 @@ install_and_config(){
     #create domain
     sudo -u ilo-pce ILO_PASSWORD=$PCE_PASSWORD illumio-pce-db-management create-domain --user-name $PCE_USERNAME --full-name admin --org-name $PCE_DOMAIN
     #install ven bundle
-    sudo -u ilo-pce illumio-pce-ctl ven-software-install /illumio/$PCE_VERSION/illumio-ven-bundle-* --compatibility-matrix /illumio/$PCE_VERSION/illumio-release-compatibility-* --default --no-prompt --orgs 1 || sudo -u ilo-pce illumio-pce-ctl ven-software-install /illumio/$PCE_VERSION/illumio-ven-bundle-* --default --no-prompt --orgs 1
+    sudo -u ilo-pce illumio-pce-ctl ven-software-install /illumio-repo/$PCE_VERSION/illumio-ven-bundle-* --compatibility-matrix /illumio-repo/$PCE_VERSION/illumio-release-compatibility-* --default --no-prompt --orgs 1 || sudo -u ilo-pce illumio-pce-ctl ven-software-install /illumio-repo/$PCE_VERSION/illumio-ven-bundle-* --default --no-prompt --orgs 1
     echo "Install complete."
 }
 
