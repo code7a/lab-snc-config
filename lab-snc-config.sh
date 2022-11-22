@@ -30,7 +30,7 @@ get_lab_snc_vars(){
     read -p "Version selection (1-${#code_versions[@]}): " PCE_VERSION_SELECTION
     if ! [[ "$PCE_VERSION_SELECTION" =~ ^[[:digit:]]+$ ]]; then
         echo "ERROR: version selection. Only key in 1-${#code_versions[@]}"
-        get_lab_snc_vars && exit 0
+        get_lab_snc_vars
     fi
     PCE_VERSION=${code_versions[(($PCE_VERSION_SELECTION-1))]}
     read -p "Enter PCE domain name: " PCE_DOMAIN
