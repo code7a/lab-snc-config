@@ -68,9 +68,9 @@ reset(){
 
 install_and_config(){
     echo " "
-    echo "Installing..."
     get_config_yml
     #install rpms
+    echo "Installing..."
     rpm -Uvh /illumio-repo/$PCE_VERSION/illumio-pce-*.rpm
     error_code=$? && if [ "$error_code" -ne 0 ]; then echo "ERROR: "$error_code && reset && install_and_config && exit 0; fi
     #generate certificate
@@ -109,7 +109,7 @@ install_and_config(){
 }
 
 BASEDIR=$(dirname $0)
-
+bash $BASEDIR/download-bins-from-repo.sh
 install_and_config
 
 exit 0
