@@ -15,7 +15,7 @@
 #limitations under the License.
  
 get_config_yml(){
-    source $BASEDIR/.lab-snc-config.yml || get_lab_snc_vars
+    source $BASEDIR/.lab-snc-config.yml > /dev/null 2>&1 || get_lab_snc_vars
 }
 
 get_lab_snc_vars(){
