@@ -14,7 +14,7 @@
 #See the License for the specific language governing permissions and
 #limitations under the License.
 
-echo "Download bins from repo..."
+echo -n "Download bins from repo..."
 
 dir=/illumio-repo/19.3.6/
 mkdir --parents $dir
