@@ -35,8 +35,10 @@ get_lab_snc_vars(){
     fi
     PCE_VERSION=${code_versions[(($PCE_VERSION_SELECTION-1))]}
     read -p "Enter PCE domain name: " PCE_DOMAIN
-    read -p "Enter PCE username email address: " PCE_USERNAME
-    echo -n "Enter PCE password (alphanumeric, 8 characters, upper and lower case): " && read -s PCE_PASSWORD
+    read -p "Enter PCE username email address [admin@pce.local]: " PCE_USERNAME
+    PCE_USERNAME=${PCE_USERNAME:-admin@pce.local}
+    echo -n "Enter PCE password (alphanumeric, 8 characters, upper and lower case) [Passw0rd]: " && read -s PCE_PASSWORD
+    PCE_PASSWORD=${PCE_PASSWORD:-Passw0rd}
     echo " "
     cat << EOF > $BASEDIR/.lab-snc-config.yml
 export PCE_VERSION=$PCE_VERSION
