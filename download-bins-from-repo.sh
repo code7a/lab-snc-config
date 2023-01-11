@@ -68,7 +68,7 @@ wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/
 echo -n "."
 wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/GA%20Releases/22.5.0/ven/bundle/illumio-ven-bundle-22.5.0-9616.tar.bz2
 echo -n "."
-wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/GA%20Releases/22.5.1/compatibility/illumio-release-compatibility-30-239.tar.bz2
+wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/GA%20Releases/22.5.0/compatibility/illumio-release-compatibility-29-233.tar.bz2
 echo -n "."
 
 #bin cleanup
