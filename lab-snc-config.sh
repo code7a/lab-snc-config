@@ -97,9 +97,10 @@ install_and_config(){
     sudo -u ilo-pce illumio-pce-ctl status -svw
     sleep 10
     sudo -u ilo-pce illumio-pce-ctl status -svw
-    sudo -u ilo-pce illumio-pce-db-management setup
+    sudo -u ilo-pce illumio-pce-db-management setup || exit 1
     sleep 10
     sudo -u ilo-pce illumio-pce-ctl set-runlevel 5
+    sleep 60
     sudo -u ilo-pce illumio-pce-ctl status -svw
     sleep 10
     sudo -u ilo-pce illumio-pce-ctl status -svw
