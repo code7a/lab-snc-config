@@ -62,7 +62,7 @@ echo -n "."
 
 dir=/illumio-repo/22.5.1/
 mkdir --parents $dir
-wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/GA%20Releases/22.5.1/pce/pkgs/illumio-pce-22.5.1-2.c7.x86_64.rpm
+wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/GA%20Releases/22.5.1/pce/pkgs/illumio-pce-22.5.1-2.c8.x86_64.rpm
 echo -n "."
 wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/GA%20Releases/22.5.1/pce/pkgs/UI/illumio-pce-ui-22.5.1.UI1-1.x86_64.rpm
 echo -n "."
