@@ -64,13 +64,17 @@ reset(){
     rm -rf /var/log/illumio-pce
     rm -rf /etc/illumio-pce
     rm -rf /opt/illumio-pce
-    rm -f $BASEDIR/.lab-snc-config.yml
+    rm -f /root/lab-snc-config/.lab-snc-config.yml
     sed -i '/localhost/!d' /etc/hosts
 }
 
 install_and_config(){
     echo " "
     get_config_yml
+    #install dependencies
+    if [[ "$PCE_VERSION" == *"19."* ]]; then
+        yum install -y ncurses-compat-libs libnsl
+    fi
     #install rpms
     echo "Installing..."
     rpm -Uvh /illumio-repo/$PCE_VERSION/illumio-pce-*.rpm
