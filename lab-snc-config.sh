@@ -97,7 +97,7 @@ install_and_config(){
     illumio-pce-env setup --list
     illumio-pce-env setup --list --test 5
     sudo -u ilo-pce illumio-pce-ctl start --runlevel 1
-    sleep 60
+    sleep 120
     sudo -u ilo-pce illumio-pce-ctl status -svw
     sleep 10
     sudo -u ilo-pce illumio-pce-ctl status -svw

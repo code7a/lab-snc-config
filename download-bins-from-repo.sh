@@ -60,11 +60,11 @@ echo -n "."
 wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/GA%20Releases/22.5.1/compatibility/illumio-release-compatibility-30-239.tar.bz2
 echo -n "."
 
-dir=/illumio-repo/22.5.10.RC1/
+dir=/illumio-repo/22.5.10.RC4/
 mkdir --parents $dir
-wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-staging/22.5/GA%20Releases/22.5.10.RC1/pce/pkgs/illumio-pce-22.5.10-90.c8.x86_64.rpm
+wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-staging/22.5/GA%20Releases/22.5.10.RC4/pce/pkgs/illumio-pce-22.5.10-95.c8.x86_64.rpm
 echo -n "."
-wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-staging/22.5/GA%20Releases/22.5.10.RC1/pce/pkgs/UI/illumio-pce-ui-22.5.10.UI1-106.x86_64.rpm
+wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-staging/22.5/GA%20Releases/22.5.10.RC4/pce/pkgs/UI/illumio-pce-ui-22.5.10.UI1-113.x86_64.rpm
 echo -n "."
 wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/19.3/GA%20Releases/19.3.8/ven/bundle/illumio-ven-bundle-19.3.8-6520.tar.bz2
 echo -n "."
@@ -72,7 +72,7 @@ wget --quiet --timestamping --directory-prefix $dir $REPO/illumio-releases/22.5/
 echo -n "."
 
 #bin cleanup
-versions="19.3.6 21.5.34 22.2.40 22.5.1 22.5.10.RC1"
+versions="19.3.6 21.5.34 22.2.40 22.5.1 22.5.10.RC4"
 dirs=$(ls /illumio-repo/)
 for dir in $dirs; do
     if [[ "$versions" != *"$dir"* ]]; then
