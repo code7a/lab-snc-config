@@ -81,7 +81,7 @@ install_and_config(){
     error_code=$? && if [ "$error_code" -ne 0 ]; then echo "ERROR: "$error_code && reset && install_and_config && exit 0; fi
     #generate certificate
     ldconfig /usr/local/lib64/
-    ls /var/lib/illumio-pce/cert/server.crt | grep server.crt || openssl req -x509 -CAkey /root/root-ca.key -CA /root/root-ca.crt -newkey rsa:2048 -nodes -sha256 -keyout /var/lib/illumio-pce/cert/server.key -out /var/lib/illumio-pce/cert/server.crt -subj '/CN='$PCE_DOMAIN -days 10950
+    ls /var/lib/illumio-pce/cert/server.crt | grep server.crt || openssl req -x509 -CAkey /root/root-ca.key -CA /root/root-ca.crt -newkey rsa:2048 -nodes -sha256 -keyout /var/lib/illumio-pce/cert/server.key -out /var/lib/illumio-pce/cert/server.crt -subj '/CN='$PCE_DOMAIN -days 10950 -addext 'subjectAltName = DNS:'$PCE_DOMAIN
     error_code=$? && if [ "$error_code" -ne 0 ]; then echo "ERROR: "$error_code && exit 1; fi
     openssl x509 -text -noout -in /var/lib/illumio-pce/cert/server.crt
     chmod 400 /var/lib/illumio-pce/cert/server.key
